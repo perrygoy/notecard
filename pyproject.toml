@@ -1,0 +1,122 @@
+[tool.poetry]
+name = "notecard"
+version = "0.1.0"
+description = "Notecard (🎶 + flashcard) helps you read music."
+authors = ["Perry Goy <perry.goy@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+PyAudio = "^0.2.14"
+sounddevice = "^0.4.7"
+numpy = "^2.0.0"
+types-pyaudio = "^0.2.16.20240516"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+ruff = "^0.5.1"
+mypy = "^1.10.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+target-version = ['py312']
+extend-exclude = '''
+# A regex preceded with ^/ will apply only to files and directories
+# in the root of the project.
+(
+    \.idea
+    | \.git
+    | \.mypy_cache
+    | \.tox
+    | \/docs
+    | ^/setup.py
+)
+
+'''
+
+
+[tool.ruff]
+target-version = "py312"  # minimum supported version
+line-length = 88  # same as Black.
+extend-exclude = [
+    "docs",
+]
+
+[tool.ruff.lint]
+select = [
+    "A",  # flake8-builtins
+    "ANN",  # flake8-annotations
+    "ARG",  # flake8-unused-arguments
+    "B",  # flake8-bugbear
+    "BLE",  # flake8-blind-except
+    "C4",  # flake8-comprehensions
+    "D",  # pydocstyle
+    "E",  # pycodestyle error
+    "EM",  # flake8-errmsg
+    "ERA",  # eradicate
+    "F",  # Pyflakes
+    "FA",  # flake8-future-annotations
+    "FBT",  # flake8-boolean-trap
+    "FIX",  # flake8-fixme
+    "FLY",  # flynt
+    "FURB",  # refurb
+    "I",  # isort
+    "ICN",  # flake8-import-conventions
+    "ISC",  # flake8-implicit-str-concat
+    "PGH",  # pygrep-hooks
+    "PIE",  # flake8-pie
+    "PL",  # pylint
+    "PT",  # flake8-pytest-style
+    "Q",  # flake8-quotes
+    "RET",  # flake8-return
+    "RSE",  # flake8-raise
+    "RUF",  # ruff specific
+    "SIM",  # flake8-simplify
+    "T10",  # flake8-debugger
+    "T20",  # flake8-print
+    "TCH",  # flake8-type-checking
+    "TRY",  # tryceratops
+    "UP",  # python upgrade
+    "W",  # pycodestyle warning
+    "YTT",  # flake8-2020
+]
+ignore = [
+    "D107",  # missing __init__ docstring, we do that in the class docstring.
+    "D203",  # one blank line before class docstring, no thanks!
+    "D212",  # multi line summary first line, we want a one line summary.
+    "ANN101",  # missing self annotation, we only annotate self when we return it.
+    "ANN102",  # missing cls annotation, we only annotate cls when we return it.
+]
+
+extend-safe-fixes = [
+    "EM101", "EM102",
+    "TCH001", "TCH002", "TCH003", "TCH004",
+    "C419",
+    "D200", "D205", "D415",
+    "PT003", "PT006", "PT018",
+    "RET504",
+    "UP006", "UP007",
+    "W291",
+]
+
+[tool.ruff.lint.flake8-pytest-style]
+mark-parentheses = false
+
+[tool.ruff.lint.pycodestyle]
+ignore-overlong-task-comments = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.flake8-type-checking]
+strict = true
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+split-on-trailing-comma = false
