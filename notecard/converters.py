@@ -1,25 +1,23 @@
 """Useful conversion functions between notes and numbers."""
 
-import re
-
 import numpy as np
 
 A4_FREQUENCY = 440
 A4_NUMBER = 69
 ACCIDENTAL_TOLERANCE = 5
-NOTE_LETTER = [
-    "C{}",
-    "C#{}",
-    "D{}",
-    "D#{}",
-    "E{}",
-    "F{}",
-    "F#{}",
-    "G{}",
-    "G#{}",
-    "A{}",
-    "A#{}",
-    "B{}",
+NOTE_LETTERS = [
+    "C{octave}",
+    "C#{octave}/Db{octave}",
+    "D{octave}",
+    "D#{octave}/Eb{octave}",
+    "E{octave}",
+    "F{octave}",
+    "F#{octave}/Gb{octave}",
+    "G{octave}",
+    "G#{octave}/Ab{octave}",
+    "A{octave}",
+    "A#{octave}/Bb{octave}",
+    "B{octave}",
 ]
 
 
@@ -30,7 +28,7 @@ def frequency_to_note_number(freq: float) -> int:
 
 def note_number_to_letter(number: int) -> str:
     """Get the letter of the note from its number."""
-    return NOTE_LETTER[int(round(number) % 12)].format(int(number / 12) - 1)
+    return NOTE_LETTERS[int(round(number) % 12)].format(octave=int(number / 12) - 1)
 
 
 def note_number_to_frequency(number: int) -> float:
