@@ -10,7 +10,8 @@ Typical usage looks like:
 """
 
 import copy
-from collections.abc import Mapping
+from collections.abc import Generator, Mapping
+from contextlib import contextmanager
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -48,7 +49,8 @@ class MicMonitor:
 
         return (in_data, paContinue)
 
-    def start(self) -> None:
+    @contextmanager
+    def start(self) -> Generator:
         """Start listening to the microphone."""
         self.mic = self.audio.open(
             format=paInt16,
@@ -58,6 +60,10 @@ class MicMonitor:
             frames_per_buffer=self.CHUNK_SIZE,
             stream_callback=self._buffer_callback,
         )
+        try:
+            yield
+        finally:
+            self.stop()
 
     def get_currently_loudest_frequency(self) -> str:
         """Get the frequency of the loudest sound the mic can currently hear.
