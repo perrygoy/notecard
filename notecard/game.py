@@ -43,7 +43,6 @@ if __name__ == "__main__":
             shuffle(notes)
 
             for note in notes:
-                test_note = note.name.split("/")[0]  # only testing on sharps
                 try:
                     note_img = pygame.image.load(note.transcription)
                 except FileNotFoundError:
@@ -59,7 +58,7 @@ if __name__ == "__main__":
                 current_freq = mic.get_currently_loudest_frequency()
                 current_note = frequency_to_nearest_note(current_freq)[0]
                 while time.time() - start < GUESS_TIME:
-                    if current_note.split("/")[0] == test_note:
+                    if current_note == note.name:
                         break
                     time.sleep(0.1)  # check every 10th of a second
                     current_freq = mic.get_currently_loudest_frequency()
@@ -71,7 +70,8 @@ if __name__ == "__main__":
                     # make them play the note to continue
                     current_freq = mic.get_currently_loudest_frequency()
                     current_note = frequency_to_nearest_note(current_freq)[0]
-                    while current_note.split("/")[0] != test_note:
+                    while current_note != note.name:
+                        print(f"I hear {current_note} and am looking for {note.name}.")
                         time.sleep(0.1)
                         current_freq = mic.get_currently_loudest_frequency()
                         current_note = frequency_to_nearest_note(current_freq)[0]

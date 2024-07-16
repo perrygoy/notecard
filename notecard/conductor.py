@@ -3,6 +3,7 @@
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from random import choice
 
 BASE_DIR = Path(__file__).parent
 CONFIGS_PREFIX = BASE_DIR / "configs"
@@ -39,12 +40,12 @@ class Conductor:
         """Get a full list of notes for the instrument."""
         notes = []
         for note in self.instrument_config["range"]:
-            massaged_name = note.lower().split("/")[0]
-            filename = f"{massaged_name}.png"
-            notes.append(
-                Note(
-                    note, NOTES_IMAGES / filename, self.instrument_images_dir / filename
+            for accidental in note.lower().split("/"):
+                filename = f"{accidental}.png"
+                notes.append(
+                    Note(
+                        note, NOTES_IMAGES / filename, self.instrument_images_dir / filename
+                    )
                 )
-            )
 
         return notes
