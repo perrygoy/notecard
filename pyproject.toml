@@ -12,6 +12,7 @@ PyAudio = "^0.2.14"
 sounddevice = "^0.4.7"
 numpy = "^2.0.0"
 types-pyaudio = "^0.2.16.20240516"
+pygame = "^2.6.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
