@@ -9,6 +9,7 @@ Typical usage looks like:
     m.stop()
 """
 
+import time
 import copy
 from collections.abc import Generator, Mapping
 from contextlib import contextmanager
@@ -60,6 +61,7 @@ class MicMonitor:
             frames_per_buffer=self.CHUNK_SIZE,
             stream_callback=self._buffer_callback,
         )
+        time.sleep(1)  # give some data to the stream
         try:
             yield
         finally:
