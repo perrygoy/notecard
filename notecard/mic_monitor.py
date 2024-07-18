@@ -9,8 +9,8 @@ Typical usage looks like:
     m.stop()
 """
 
-import time
 import copy
+import time
 from collections.abc import Generator, Mapping
 from contextlib import contextmanager
 from typing import TYPE_CHECKING
@@ -67,7 +67,7 @@ class MicMonitor:
         finally:
             self.stop()
 
-    def get_currently_loudest_frequency(self) -> str:
+    def get_currently_loudest_frequency(self) -> float:
         """Get the frequency of the loudest sound the mic can currently hear.
 
         This approach was lifted from the audio_analyzer.py file at

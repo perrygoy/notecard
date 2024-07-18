@@ -2,7 +2,6 @@
 """Run the game!"""
 
 import logging
-import time
 from pathlib import Path
 from random import shuffle
 
